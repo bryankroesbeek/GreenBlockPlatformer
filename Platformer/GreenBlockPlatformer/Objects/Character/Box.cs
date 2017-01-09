@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace GreenBlockPlatformer.Objects {
+namespace GreenBlockPlatformer.Objects.Character {
     public class Box : IBox{
         public Texture2D Texture { get; set; }
         public Vector2 Position { get; set; }

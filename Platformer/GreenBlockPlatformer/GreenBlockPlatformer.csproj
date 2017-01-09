@@ -40,9 +40,9 @@
   <ItemGroup>
     <Compile Include="Game1.cs" />
     <Compile Include="Globals.cs" />
-    <Compile Include="Objects\Box.cs" />
-    <Compile Include="Objects\BoxState.cs" />
-    <Compile Include="Objects\IBox.cs" />
+    <Compile Include="Objects\Character\Box.cs" />
+    <Compile Include="Objects\Character\BoxState.cs" />
+    <Compile Include="Objects\Character\IBox.cs" />
     <Compile Include="Objects\IComponent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
