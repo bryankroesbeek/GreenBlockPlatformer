@@ -1,20 +1,35 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+using GreenBlockPlatformer.Global;
+using GreenBlockPlatformer.Objects.Platforms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace GreenBlockPlatformer.Objects.Character {
-    public class Box : IBox{
+    public class Box : IBox {
         public Texture2D Texture { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 Speed { get; set; }
         public BoxState State { get; set; }
-
         public Vector2 AirResistance => ((Globals.Gravity / 75) * new Vector2(Math.Abs(this.Speed.X), Math.Abs(this.Speed.Y)));
+        public List<Platform> Platforms { get; set; }
 
-        public Box(Texture2D texture, Vector2 position) {
+        private Platform UnderlyingPlatform => Platforms
+            .Where(x => 
+                this.Position.X > x.Position.X && this.Position.X < (x.Position.X + x.Width) || 
+                this.Position.X + this.Texture.Width > x.Position.X && this.Position.X + this.Texture.Width < (x.Position.X + x.Width)
+            )
+            .Where(y => y.Position.Y > this.Position.Y)
+            .OrderBy(y => y.Position.Y)
+            .ToList().FirstOrDefault();
+
+        public Box(Texture2D texture, Vector2 position, List<Platform> platforms = null) {
             this.Texture = texture;
             this.Position = position;
+
+            this.Platforms = platforms;
         }
 
         public void Update(GameTime gt) {
@@ -34,8 +49,8 @@ namespace GreenBlockPlatformer.Objects.Character {
             if (this.Speed.Y > 0)
                 this.State = BoxState.Falling;
 
-            if (this.Position.Y >= Globals.ScreenHeight - this.Texture.Height && this.State != BoxState.Jumping) {
-                this.Position = new Vector2(this.Position.X, Globals.ScreenHeight - this.Texture.Height);
+            if (this.UnderlyingPlatform != null && this.Position.Y >= this.UnderlyingPlatform.Position.Y - this.Texture.Height && this.State != BoxState.Jumping) {
+                this.Position = new Vector2(this.Position.X, this.UnderlyingPlatform.Position.Y - this.Texture.Height);
                 this.Speed = new Vector2(this.Speed.X, 0);
                 this.State = BoxState.Standing;
             }
@@ -60,9 +75,7 @@ namespace GreenBlockPlatformer.Objects.Character {
         }
 
         public void Draw(SpriteBatch sb, GameTime gt) {
-           sb.Draw(this.Texture, this.Position, Color.White);
+            sb.Draw(this.Texture, this.Position, Color.White);
         }
     }
-
-    
 }
