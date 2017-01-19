@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace GreenBlockPlatformer {
+namespace GreenBlockPlatformer.Global {
     static class Globals {
         public static Vector2 Gravity = new Vector2(0, 2F);
         public const int MaxSpeed = 5;
