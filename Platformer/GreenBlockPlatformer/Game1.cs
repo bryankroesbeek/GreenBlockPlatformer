@@ -1,5 +1,9 @@
-﻿using GreenBlockPlatformer.Objects;
+﻿using System.Collections.Generic;
+using GreenBlockPlatformer.Global;
+using GreenBlockPlatformer.Objects;
 using GreenBlockPlatformer.Objects.Character;
+using GreenBlockPlatformer.Objects.Platforms;
+using GreenBlockPlatformer.Objects.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -7,12 +11,13 @@ using Microsoft.Xna.Framework.Input;
 namespace GreenBlockPlatformer {
     public class Game1 : Game {
         GraphicsDeviceManager _graphics;
-        SpriteBatch _spriteBatch;
+        SpriteBatch SpriteBatch { get; set; }
 
-        private Texture2D _texture;
-        private Vector2 _texpos;
+        private Box Box { get; set; }
 
-        private Box box;
+        private IWorld World { get; set; }
+
+        private List<Platform> PlatformList { get; set; }
 
         public Game1() {
             this._graphics = new GraphicsDeviceManager(this) {
@@ -23,27 +28,17 @@ namespace GreenBlockPlatformer {
         }
         
         protected override void Initialize() {
-            this._texture = new Texture2D(this.GraphicsDevice, 45, 75);
-            this._texpos = new Vector2(0, 0);
 
             base.Initialize();
         }
         
         protected override void LoadContent() {
             // Create a new SpriteBatch, which can be used to draw textures.
-            this._spriteBatch = new SpriteBatch(this.GraphicsDevice);
+            this.SpriteBatch = new SpriteBatch(this.GraphicsDevice);
 
-            Color[] colors = new Color[this._texture.Width * this._texture.Height];
-            for (int i = 0; i < colors.Length; i++) {
-                colors[i] = new Color(16, 137, 62);
-            }
+            this.Box = new Box(this.GraphicsDevice.CreateMonoTexture(45, 75, new Color(16, 137, 62)), new Vector2(0, 0));
 
-            
-            this._texture.SetData(colors);
-            this._texture.SetData(colors);
-
-            this.box = new Box(this._texture, this._texpos);
-            
+            this.World = new GeneralWorld(Box, this.GraphicsDevice);
         }
         
         protected override void UnloadContent() {
@@ -54,18 +49,18 @@ namespace GreenBlockPlatformer {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
-            this.box.Update(gameTime);
+            this.World.Update(gameTime);
 
             base.Update(gameTime);
         }
         
         protected override void Draw(GameTime gameTime) {
             this.GraphicsDevice.Clear(new Color(225, 225, 225));
-            this._spriteBatch.Begin();
+            this.SpriteBatch.Begin();
 
-            this.box.Draw(this._spriteBatch, gameTime);
+            this.World.Draw(this.SpriteBatch, gameTime);
 
-            this._spriteBatch.End();
+            this.SpriteBatch.End();
 
             base.Draw(gameTime);
         }

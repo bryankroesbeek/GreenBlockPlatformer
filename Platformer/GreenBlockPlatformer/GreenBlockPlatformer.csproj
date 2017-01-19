@@ -39,11 +39,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Game1.cs" />
-    <Compile Include="Globals.cs" />
+    <Compile Include="Global\Globals.cs" />
+    <Compile Include="Global\TextureCreator.cs" />
     <Compile Include="Objects\Character\Box.cs" />
     <Compile Include="Objects\Character\BoxState.cs" />
     <Compile Include="Objects\Character\IBox.cs" />
     <Compile Include="Objects\IComponent.cs" />
+    <Compile Include="Objects\Platforms\IPlatform.cs" />
+    <Compile Include="Objects\Platforms\Platform.cs" />
+    <Compile Include="Objects\World\GeneralWorld.cs" />
+    <Compile Include="Objects\World\IWorld.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
