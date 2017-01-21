@@ -8,7 +8,7 @@ using GreenBlockPlatformer.Objects.Platforms;
 
 namespace GreenBlockPlatformer.Objects.World {
     interface IWorld : IDrawableComponent{
-        Box Character { get; set; }
+        IBox Character { get; set; }
         List<Platform> Platforms { get; set; }
     }
 }

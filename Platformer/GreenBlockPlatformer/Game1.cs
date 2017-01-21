@@ -13,11 +13,11 @@ namespace GreenBlockPlatformer {
         GraphicsDeviceManager _graphics;
         SpriteBatch SpriteBatch { get; set; }
 
-        private Box Box { get; set; }
+        private IBox Box { get; set; }
 
         private IWorld World { get; set; }
 
-        private List<Platform> PlatformList { get; set; }
+        private List<IPlatform> PlatformList { get; set; }
 
         public Game1() {
             this._graphics = new GraphicsDeviceManager(this) {

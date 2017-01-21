@@ -11,10 +11,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GreenBlockPlatformer.Objects.World {
     class GeneralWorld : IWorld {
-        public Box Character { get; set; }
+        public IBox Character { get; set; }
         public List<Platform> Platforms { get; set; }
 
-        public GeneralWorld(Box character, GraphicsDevice gd) {
+        public GeneralWorld(IBox character, GraphicsDevice gd) {
             this.Character = character;
 
             this.Platforms = new List<Platform> {
