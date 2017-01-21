@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GreenBlockPlatformer.Global;
 using GreenBlockPlatformer.Objects;
+using GreenBlockPlatformer.Objects.Camera;
 using GreenBlockPlatformer.Objects.Character;
 using GreenBlockPlatformer.Objects.Platforms;
 using GreenBlockPlatformer.Objects.World;
@@ -15,6 +16,8 @@ namespace GreenBlockPlatformer {
 
         private IBox Box { get; set; }
 
+        private ICamera Camera { get; set; }
+
         private IWorld World { get; set; }
 
         private List<IPlatform> PlatformList { get; set; }
@@ -22,7 +25,8 @@ namespace GreenBlockPlatformer {
         public Game1() {
             this._graphics = new GraphicsDeviceManager(this) {
                 PreferredBackBufferWidth = Globals.ScreenWidth,
-                PreferredBackBufferHeight = Globals.ScreenHeight
+                PreferredBackBufferHeight = Globals.ScreenHeight,
+                IsFullScreen = Globals.FullScreen
             };
             this.Content.RootDirectory = "Content";
         }
@@ -38,7 +42,9 @@ namespace GreenBlockPlatformer {
 
             this.Box = new Box(this.GraphicsDevice.CreateMonoTexture(45, 75, new Color(16, 137, 62)), new Vector2(0, 0));
 
-            this.World = new GeneralWorld(Box, this.GraphicsDevice);
+            this.Camera = new BoxCamera(this.Box, this.GraphicsDevice.Viewport);
+
+            this.World = new GeneralWorld(Box, this.GraphicsDevice, this.Camera);
         }
         
         protected override void UnloadContent() {
@@ -56,7 +62,7 @@ namespace GreenBlockPlatformer {
         
         protected override void Draw(GameTime gameTime) {
             this.GraphicsDevice.Clear(new Color(225, 225, 225));
-            this.SpriteBatch.Begin();
+            this.SpriteBatch.Begin(transformMatrix: this.Camera.ViewMatrix);
 
             this.World.Draw(this.SpriteBatch, gameTime);
 

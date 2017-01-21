@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GreenBlockPlatformer.Global;
+using GreenBlockPlatformer.Objects.Camera;
 using GreenBlockPlatformer.Objects.Character;
 using GreenBlockPlatformer.Objects.Platforms;
 using Microsoft.Xna.Framework;
@@ -14,8 +15,11 @@ namespace GreenBlockPlatformer.Objects.World {
         public IBox Character { get; set; }
         public List<Platform> Platforms { get; set; }
 
-        public GeneralWorld(IBox character, GraphicsDevice gd) {
+        private ICamera Camera { get; set; }
+
+        public GeneralWorld(IBox character, GraphicsDevice gd, ICamera camera) {
             this.Character = character;
+            this.Camera = camera;
 
             this.Platforms = new List<Platform> {
                 new Platform(gd.CreateMonoTexture(200, 50, new Color(56, 56, 56)), new Vector2(-10, 100)),
@@ -41,6 +45,8 @@ namespace GreenBlockPlatformer.Objects.World {
         public void Update(GameTime gameTime) {
             this.Character.Platforms = this.Platforms;
             this.Character.Update(gameTime);
+
+            this.Camera.Update(gameTime);
 
             foreach (Platform p in this.Platforms) {
                 p.Update(gameTime);
