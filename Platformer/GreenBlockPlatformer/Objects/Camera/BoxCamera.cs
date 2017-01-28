@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GreenBlockPlatformer.Objects.Character;
+using GreenBlockPlatformer.Global;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -21,7 +22,7 @@ namespace GreenBlockPlatformer.Objects.Camera {
         private IBox Target { get; set; }
         private Viewport Viewport { get; set; }
         private float Rotation { get; set; }
-        private float Zoom { get; set; }
+        private float Zoom => Globals.Zoom; 
 
         public Matrix ViewMatrix {
             get {
@@ -38,7 +39,7 @@ namespace GreenBlockPlatformer.Objects.Camera {
             this.Viewport = viewport;
 
             this.Rotation = 0.0f;
-            this.Zoom = 1.0f;
+            //this.Zoom = 1.0f;
 
             this.Position = target.Position;
             this.Origin = new Vector2(this.Viewport.Width / 2.0f, this.Viewport.Height / 2.0f);

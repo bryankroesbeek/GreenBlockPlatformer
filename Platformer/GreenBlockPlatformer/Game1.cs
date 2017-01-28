@@ -55,6 +55,13 @@ namespace GreenBlockPlatformer {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
+            if (Keyboard.GetState().IsKeyDown(Keys.Z)) {
+                Globals.Zoom += Globals.Zoom * 0.05f;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.X)) {
+                Globals.Zoom += Globals.Zoom * -0.05f;
+            }
+
             this.World.Update(gameTime);
 
             base.Update(gameTime);
