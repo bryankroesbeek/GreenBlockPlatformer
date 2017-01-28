@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Game1.cs" />
+    <Compile Include="Global\Compare.cs" />
     <Compile Include="Global\Globals.cs" />
     <Compile Include="Global\TextureCreator.cs" />
     <Compile Include="Objects\Camera\BoxCamera.cs" />
