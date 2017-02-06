@@ -8,11 +8,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace GreenBlockPlatformer.Objects.Character {
-    public class Box : IBox {
+    public class Character : ICharacter {
         public Texture2D Texture { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 Speed { get; set; }
-        public BoxState State { get; set; }
+        public CharacterState State { get; set; }
         public Vector2 AirResistance => ((Globals.Gravity / 75) * new Vector2(Math.Abs(this.Speed.X), Math.Abs(this.Speed.Y)));
         public List<Platform> Platforms { get; set; }
 
@@ -25,7 +25,7 @@ namespace GreenBlockPlatformer.Objects.Character {
             .OrderBy(y => y.Position.Y)
             .ToList().FirstOrDefault();
 
-        public Box(Texture2D texture, Vector2 position, List<Platform> platforms = null) {
+        public Character(Texture2D texture, Vector2 position, List<Platform> platforms = null) {
             this.Texture = texture;
             this.Position = position;
 
@@ -33,29 +33,29 @@ namespace GreenBlockPlatformer.Objects.Character {
         }
 
         public void Update(GameTime gt) {
-            if (Keyboard.GetState().IsKeyDown(Keys.D) && this.State == BoxState.Standing) {
+            if (Keyboard.GetState().IsKeyDown(Keys.D) && this.State == CharacterState.Standing) {
                 this.Speed += new Vector2(2.5f, 0);
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.A) && this.State == BoxState.Standing) {
+            if (Keyboard.GetState().IsKeyDown(Keys.A) && this.State == CharacterState.Standing) {
                 this.Speed += new Vector2(-2.5f, 0);
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && (this.State == BoxState.Standing)) {
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && (this.State == CharacterState.Standing)) {
                 this.Speed = new Vector2(this.Speed.X, -30);
-                this.State = BoxState.Jumping;
+                this.State = CharacterState.Jumping;
             }
 
             this.Speed += (Globals.Gravity - this.AirResistance);
             this.Position += this.Speed;
             if (this.Speed.Y > 0)
-                this.State = BoxState.Falling;
+                this.State = CharacterState.Falling;
 
-            if (this.Position.Y >= this.UnderlyingPlatform?.Position.Y - this.Texture.Height && this.State != BoxState.Jumping) {
+            if (this.Position.Y >= this.UnderlyingPlatform?.Position.Y - this.Texture.Height && this.State != CharacterState.Jumping) {
                 this.Position = new Vector2(this.Position.X, this.UnderlyingPlatform.Position.Y - this.Texture.Height);
                 this.Speed = new Vector2(this.Speed.X, 0);
-                this.State = BoxState.Standing;
+                this.State = CharacterState.Standing;
             }
 
-            if (this.State == BoxState.Standing) {
+            if (this.State == CharacterState.Standing) {
                 if (this.Speed.X > Globals.MaxSpeed) {
                     this.Speed = new Vector2(Globals.MaxSpeed, this.Speed.Y);
                 } else if (this.Speed.X < -Globals.MaxSpeed) {

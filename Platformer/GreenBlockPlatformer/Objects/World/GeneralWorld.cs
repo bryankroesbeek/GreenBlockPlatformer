@@ -12,14 +12,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GreenBlockPlatformer.Objects.World {
     class GeneralWorld : IWorld {
-        public IBox Character { get; set; }
+        public ICharacter Character { get; set; }
         public List<Platform> Platforms { get; set; }
 
         private List<Platform> OutOfRangePlatforms { get; set; }
 
         private ICamera Camera { get; set; }
 
-        public GeneralWorld(IBox character, GraphicsDevice gd, ICamera camera) {
+        public GeneralWorld(ICharacter character, GraphicsDevice gd, ICamera camera) {
             this.Character = character;
             this.Camera = camera;
 
@@ -41,7 +41,7 @@ namespace GreenBlockPlatformer.Objects.World {
 
         }
 
-        public GeneralWorld(Box character, List<Platform> platforms) {
+        public GeneralWorld(Character.Character character, List<Platform> platforms) {
             this.Character = character;
             this.Platforms = platforms;
         }

@@ -14,7 +14,7 @@ namespace GreenBlockPlatformer {
         GraphicsDeviceManager _graphics;
         SpriteBatch SpriteBatch { get; set; }
 
-        private IBox Box { get; set; }
+        private ICharacter Box { get; set; }
 
         private ICamera Camera { get; set; }
 
@@ -40,9 +40,9 @@ namespace GreenBlockPlatformer {
             // Create a new SpriteBatch, which can be used to draw textures.
             this.SpriteBatch = new SpriteBatch(this.GraphicsDevice);
 
-            this.Box = new Box(this.GraphicsDevice.CreateMonoTexture(45, 75, new Color(16, 137, 62)), new Vector2(0, 0));
+            this.Box = new Character(this.GraphicsDevice.CreateMonoTexture(45, 75, new Color(16, 137, 62)), new Vector2(0, 0));
 
-            this.Camera = new BoxCamera(this.Box, this.GraphicsDevice.Viewport);
+            this.Camera = new CharacterCamera(this.Box, this.GraphicsDevice.Viewport);
 
             this.World = new GeneralWorld(Box, this.GraphicsDevice, this.Camera);
         }

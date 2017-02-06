@@ -42,11 +42,11 @@
     <Compile Include="Global\Compare.cs" />
     <Compile Include="Global\Globals.cs" />
     <Compile Include="Global\TextureCreator.cs" />
-    <Compile Include="Objects\Camera\BoxCamera.cs" />
+    <Compile Include="Objects\Camera\CharacterCamera.cs" />
     <Compile Include="Objects\Camera\ICamera.cs" />
-    <Compile Include="Objects\Character\Box.cs" />
-    <Compile Include="Objects\Character\BoxState.cs" />
-    <Compile Include="Objects\Character\IBox.cs" />
+    <Compile Include="Objects\Character\Character.cs" />
+    <Compile Include="Objects\Character\CharacterState.cs" />
+    <Compile Include="Objects\Character\ICharacter.cs" />
     <Compile Include="Objects\IComponent.cs" />
     <Compile Include="Objects\Platforms\IPlatform.cs" />
     <Compile Include="Objects\Platforms\Platform.cs" />

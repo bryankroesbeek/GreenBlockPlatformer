@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GreenBlockPlatformer.Objects.Camera {
-    public class BoxCamera : ICamera{
+    public class CharacterCamera : ICamera{
         public Texture2D Texture {
             get { throw new NotImplementedException(); }
             set { throw new NotImplementedException(); }
@@ -19,7 +19,7 @@ namespace GreenBlockPlatformer.Objects.Camera {
 
         private Vector2 Origin { get; set; }
 
-        private IBox Target { get; set; }
+        private ICharacter Target { get; set; }
         private Viewport Viewport { get; set; }
         private float Rotation { get; set; }
         private float Zoom => Globals.Zoom; 
@@ -34,7 +34,7 @@ namespace GreenBlockPlatformer.Objects.Camera {
             }
         }
 
-        public BoxCamera(IBox target, Viewport viewport) {
+        public CharacterCamera(ICharacter target, Viewport viewport) {
             this.Target = target;
             this.Viewport = viewport;
 
