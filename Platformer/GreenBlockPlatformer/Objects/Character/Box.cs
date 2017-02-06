@@ -49,7 +49,7 @@ namespace GreenBlockPlatformer.Objects.Character {
             if (this.Speed.Y > 0)
                 this.State = BoxState.Falling;
 
-            if (this.UnderlyingPlatform != null && this.Position.Y >= this.UnderlyingPlatform.Position.Y - this.Texture.Height && this.State != BoxState.Jumping) {
+            if (this.Position.Y >= this.UnderlyingPlatform?.Position.Y - this.Texture.Height && this.State != BoxState.Jumping) {
                 this.Position = new Vector2(this.Position.X, this.UnderlyingPlatform.Position.Y - this.Texture.Height);
                 this.Speed = new Vector2(this.Speed.X, 0);
                 this.State = BoxState.Standing;
@@ -65,10 +65,10 @@ namespace GreenBlockPlatformer.Objects.Character {
                     this.Speed = new Vector2(0, this.Speed.Y);
                 } else {
                     if (this.Speed.X < 0) {
-                        this.Speed = new Vector2(this.Speed.X + 1f, this.Speed.Y);
+                        this.Speed = new Vector2(this.Speed.X + 0.5f, this.Speed.Y);
                     }
                     if (this.Speed.X > 0) {
-                        this.Speed = new Vector2(this.Speed.X - 1f, this.Speed.Y);
+                        this.Speed = new Vector2(this.Speed.X - 0.5f, this.Speed.Y);
                     }
                 }
             }
