@@ -50,7 +50,10 @@
     <Compile Include="Objects\IComponent.cs" />
     <Compile Include="Objects\Platforms\IPlatform.cs" />
     <Compile Include="Objects\Platforms\Platform.cs" />
+    <Compile Include="Objects\World\Backgrounds\Background.cs" />
+    <Compile Include="Objects\World\Backgrounds\Foreground.cs" />
     <Compile Include="Objects\World\GeneralWorld.cs" />
+    <Compile Include="Objects\World\Backgrounds\IBackground.cs" />
     <Compile Include="Objects\World\IWorld.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,6 +66,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Background\Space.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Background\Tree1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Background\Tree10.png" />
+    <Content Include="Content\Background\Tree2.png" />
+    <Content Include="Content\Background\Tree3.png" />
+    <Content Include="Content\Background\Tree4.png" />
+    <Content Include="Content\Background\Tree5.gif" />
+    <Content Include="Content\Background\Tree6.png" />
+    <Content Include="Content\Background\Tree7.png" />
+    <Content Include="Content\Background\Tree8.png" />
+    <Content Include="Content\Background\Tree9.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

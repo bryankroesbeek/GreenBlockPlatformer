@@ -5,6 +5,7 @@ using GreenBlockPlatformer.Objects.Camera;
 using GreenBlockPlatformer.Objects.Character;
 using GreenBlockPlatformer.Objects.Platforms;
 using GreenBlockPlatformer.Objects.World;
+using GreenBlockPlatformer.Objects.World.Backgrounds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -44,7 +45,7 @@ namespace GreenBlockPlatformer {
 
             this.Camera = new CharacterCamera(this.Box, this.GraphicsDevice.Viewport);
 
-            this.World = new GeneralWorld(Box, this.GraphicsDevice, this.Camera);
+            this.World = new GeneralWorld(Box, this.GraphicsDevice, this.Camera, this.Content.CreateTextureFromFile("Background/Space"), this.Content.CreateTextureFromFile("Background/Tree1"));
         }
         
         protected override void UnloadContent() {
